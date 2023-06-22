@@ -7,4 +7,6 @@ xgboost
 catboost
 ipykernel
 category_encoders
+boto3==1.24.82
+pymongo[srv]
 #-e .
