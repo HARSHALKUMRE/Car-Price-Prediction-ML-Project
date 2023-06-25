@@ -1,7 +1,5 @@
 columns:
   car_name: category 
-  brand: category
-  model: category
   vehicle_age: int
   km_driven: int
   seller_type: category
