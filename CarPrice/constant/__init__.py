@@ -1,4 +1,5 @@
 import os
+from CarPrice.constant.s3_bucket import TRAINING_BUCKET_NAME
 
 PIPELINE_NAME: str = "car_price"
 ARTIFACT_DIR: str = "artifacts"
@@ -48,3 +49,16 @@ MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float = 0.6
 MODEL_TRAINER_MODEL_CONFIG_FILE_PATH: str = os.path.join("configs", "model.yaml")
+
+"""
+MODEL Evauation related constant start with MODEL_EVALUATION var name
+"""
+
+MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
+
+"""
+MODEL Pusher related constant start with MODEL_PUSHER var name
+"""
+
+MODEL_PUSHER_BUCKET_NAME = TRAINING_BUCKET_NAME
+MODEL_PUSHER_S3_KEY = "model-registry"
