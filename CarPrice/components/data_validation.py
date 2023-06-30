@@ -5,11 +5,13 @@ from typing import Tuple, Union
 import pandas as pd
 from evidently.model_profile import Profile
 from evidently.model_profile.sections import DataDriftProfileSection
+from evidently.dashboard import Dashboard
+from evidently.dashboard.tabs import DataDriftTab
 from pandas import DataFrame
 
 from CarPrice.exception import CarPriceException
 from CarPrice.logger import logging
-from CarPrice.utils.main_utils import read_yaml_file, write_yaml_file
+from CarPrice.utils.main_utils import read_yaml_file, write_yaml_file, save_object
 from CarPrice.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from CarPrice.entity.config_entity import DataValidationConfig
 from CarPrice.constant import SCHEMA_FILE_PATH
@@ -121,6 +123,25 @@ class DataValidation:
         except Exception as e:
             raise CarPriceException(e, sys) from e
 
+    def save_data_drift_report_page(self, reference_df: DataFrame, current_df: DataFrame,):
+        try:
+            data_drift_dashboard = Dashboard(tabs=[DataDriftTab()])
+
+            data_drift_dashboard.calculate(reference_df, current_df)
+
+            report_page_file_path = self.data_validation_config.drift_report_page_file_path
+            report_page_dir = os.path.dirname(report_page_file_path)
+            os.makedirs(report_page_dir,exist_ok=True)
+
+            data_drift_dashboard.save(report_page_file_path)
+
+            #dashboard_report = dashboard.loads(dashboard)
+
+            #save_object(file_path=self.data_validation_config.drift_report_page_file_path, obj=dashboard)
+
+        except Exception as e:
+            raise CarPriceException(e, sys) from e
+
     def initiate_data_validation(self) -> DataValidationArtifact:
         """
         Method Name :   initiate_data_validation
@@ -164,6 +185,7 @@ class DataValidation:
             validation_status = len(validation_error_msg) == 0
             if validation_status:
                 drift_status = self.detect_dataset_drift(train_df, test_df)
+                drift_status = self.save_data_drift_report_page(train_df, test_df)
                 if drift_status:
                     logging.info(f"Data Drift detected.")
             else:
@@ -172,7 +194,8 @@ class DataValidation:
             data_validation_artifact = DataValidationArtifact(
                 validation_status=validation_status,
                 message= validation_error_msg,
-                drift_report_file_path=self.data_validation_config.drift_report_file_path
+                drift_report_file_path=self.data_validation_config.drift_report_file_path,
+                drift_report_page_file_path=self.data_validation_config.drift_report_page_file_path
             )
             logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact

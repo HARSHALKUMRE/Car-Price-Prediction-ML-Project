@@ -30,6 +30,8 @@ class DataValidationConfig:
     data_validation_dir: str = os.path.join(training_pipeline_config.artifact_dir, DATA_VALIDATION_DIR_NAME)
     drift_report_file_path: str = os.path.join(data_validation_dir, DATA_VALIDATION_DRIFT_REPORT_DIR,
                                                DATA_VALIDATION_DRIFT_REPORT_FILE_NAME)
+    drift_report_page_file_path: str = os.path.join(data_validation_dir, DATA_VALIDATION_DRIFT_REPORT_DIR,
+                                                         DATA_VALIDATION_DRIFT_REPORT_PAGE_FILE_NAME)
 
 
 @dataclass
@@ -55,10 +57,10 @@ class ModelTrainerConfig:
 class ModelEvaluationConfig:
     changed_threshold_score: float = MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
     bucket_name: str = MODEL_PUSHER_BUCKET_NAME
-    s3_model_key_path: str = "heart-stroke-model.pkl"
+    s3_model_key_path: str = "car-price-model.pkl"
 
 
 @dataclass
 class ModelPusherConfig:
     bucket_name: str = MODEL_PUSHER_BUCKET_NAME
-    s3_model_key_path: str = "heart-stroke-model.pkl"
+    s3_model_key_path: str = "car-price-model.pkl"
