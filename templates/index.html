@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <a href="https://github.com/HARSHALKUMRE/Heart-Stroke-Prediction-ML-Pipeline" class="top-left-link" target="_blank">GitHub
+        Repository Link</a>
+    <h1>Car Price Prediction</h1>
+    <div class="form-box">
+        <form action="{{url_for('predict_datapoint')}}" method="POST">
+
+            <div class="form-group">
+                <label for="gender">Car Name:</label>
+                <select id="car_name" name="car_name" placeholder="Car Name" required="required">
+                    <option value="" disabled selected>Select Car Name</option>
+                    <option>Hyundai i20</option>
+                    <option>Maruti Swift Dzire</option>
+                    <option>Maruti Swift</option>
+                    <option>Maruti Alto</option>    
+                    <option>Honda City</option>               
+                    <option>Maruti Wagon R</option>            
+                    <option>Hyundai Grand</option>             
+                    <option>Toyota Innova</option>             
+                    <option>Hyundai Verna</option>             
+                    <option>Hyundai i10</option>               
+                    <option>Ford Ecosport</option>             
+                    <option>Volkswagen Polo</option>
+                    <option>Maruti Baleno</option>
+                    <option>Honda Amaze</option>
+                    <option>Maruti Ciaz </option>
+                    <option>Maruti Ertiga</option>
+                    <option>Hyundai Creta</option>
+                    <option>Mahindra XUV500</option>
+                    <option>Renault KWID</option>
+                    <option>Maruti Vitara</option> 
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="vehicle_age">Vechicle age:</label>
+                <input type="text" id="vehicle_age" name="vehicle_age" min="0" max="30" placeholder="0 - 30 years", required="required">
+            </div>
+
+            <div class="form-group">
+                <label for="km_driven">Kilometer driven:</label>
+                <input type="text" id="km_driven" name="km_driven" min="0" max="100000" step="1" placeholder="0 - 1L km", required="required">
+            </div>
+
+
+            <div class="form-group">
+                <label for="seller_type">Select Seller type:</label>
+                <select id="seller_type" name="seller_type" placeholder="seller_type"
+                    required="required">
+                    <option value="" disabled selected>Seller Type</option>
+                    <option>Dealer</option>
+                    <option>Individual</option>
+                    <option>Trustmark Dealer</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fuel_type">Select Fuel Type:</label>
+                <select id="fuel_type" name="fuel_type" placeholder="fuel_type"
+                    required="required">
+                    <option value="" disabled selected>Fuel Type</option>
+                    <option>Petrol</option>
+                    <option>Diesel</option>
+                    <option>Electric</option>
+                    <option>CNG</option>
+                    <option>LPG</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="transmission">Select Transmission Type:</label>
+                <select id="transmission" name="transmission" placeholder="transmission"
+                    required="required">
+                    <option value="" disabled selected>Transmission Type</option>
+                    <option>Automatic</option>
+                    <option>Manual</option>
+                </select>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="mileage">Mileage:</label>
+                <input type="text" id="mileage" name="mileage" min="4" max="30" placeholder="4 - 30 km/litre", required="required">
+            </div>
+            
+            <div class="form-group">
+                <label for="engine">Engine:</label>
+                <input type="text" id="engine" name="engine" min="700" max="7000" placeholder="700cc - 7000cc Engine capacity", required="required">
+            </div>
+            
+            <div class="form-group">
+                <label for="max_power">Max Power:</label>
+                <input type="text" id="max_power" name="max_power" min="38" max="600" placeholder="38bhp - 600bhp Engine power", required="required">
+            </div>
+            
+            <div class="form-group">
+                <label for="seats">Total Seats counts:</label>
+                <input type="text" id="seats" name="seats" min="2" max="9" placeholder="2 - 9 seating", required="required">
+            </div>
+
+            <div style="clear:both;"></div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <h2>
+        Predicted Car Price is : {{ results }}₹
+    </h2>
+</body>
+
+</html>

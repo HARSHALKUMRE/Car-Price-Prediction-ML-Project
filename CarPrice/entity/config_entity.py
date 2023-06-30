@@ -64,3 +64,8 @@ class ModelEvaluationConfig:
 class ModelPusherConfig:
     bucket_name: str = MODEL_PUSHER_BUCKET_NAME
     s3_model_key_path: str = "car-price-model.pkl"
+
+@dataclass
+class CarPricePredictionConfig:
+    model_file_path: str = "car-price-model.pkl"
+    model_bucket_name: str = TRAINING_BUCKET_NAME

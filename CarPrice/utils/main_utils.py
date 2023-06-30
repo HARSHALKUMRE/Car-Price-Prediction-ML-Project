@@ -10,6 +10,7 @@ from CarPrice.constant import SCHEMA_FILE_PATH
 from CarPrice.exception import CarPriceException
 from CarPrice.logger import logging
 from pandas import DataFrame
+import pandas as pd
 import numpy as np
 
 def read_yaml_file(file_path: str) -> dict:
@@ -81,5 +82,14 @@ def save_object(file_path: str, obj: object) -> None:
             dill.dump(obj, file_obj)
 
         logging.info("Exited the save_object method of MainUtils class")
+    except Exception as e:
+        raise CarPriceException(e, sys) from e
+
+def get_carlist():
+    try:
+        data_url = "https://raw.githubusercontent.com/HARSHALKUMRE/Main-Branching/main/cardekho_dataset.csv"
+        df = pd.read_csv(data_url)
+        car_list = list(df.car_name.unique())
+        return car_list
     except Exception as e:
         raise CarPriceException(e, sys) from e
