@@ -1,1 +1,1 @@
-TRAINING_BUCKET_NAME = "car-io-files1"
+TRAINING_BUCKET_NAME = "car-price-io-files"
