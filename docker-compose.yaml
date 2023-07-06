@@ -1,6 +1,6 @@
 version: "2"
 services:
- application:
+ airflow-server:
     build: .
     image: ${IMAGE_NAME}
     container_name: car-price
@@ -13,7 +13,6 @@ services:
       - MONGODB_URL = ${MONGODB_URL}
       - BUCKET_NAME = ${BUCKET_NAME}
 
-services1:
  application:
     build: .
     image: ${IMAGE_NAME}
