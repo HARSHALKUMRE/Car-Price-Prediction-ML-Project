@@ -3,5 +3,6 @@ artifacts
 notebooks
 *egg-info
 batch_prediction.py
-data_dump.py
+.env
+main.py
 README.md
