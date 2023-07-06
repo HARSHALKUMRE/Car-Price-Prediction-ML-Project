@@ -28,4 +28,4 @@ flask
 flask_cors
 apache-airflow
 pendulum
-#-e .
+-e .
