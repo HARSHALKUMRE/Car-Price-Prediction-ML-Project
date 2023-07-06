@@ -12,3 +12,16 @@ services:
       - AWS_DEFAULT_REGION = ${AWS_DEFAULT_REGION}
       - MONGODB_URL = ${MONGODB_URL}
       - BUCKET_NAME = ${BUCKET_NAME}
+
+services1:
+ application:
+    build: .
+    image: ${IMAGE_NAME}
+    container_name: car-price-1
+    ports:
+      - "8000:5000"
+    environment:
+      - AWS_ACCESS_KEY_ID = ${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY = ${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION = ${AWS_DEFAULT_REGION}
+      - BUCKET_NAME = ${BUCKET_NAME}

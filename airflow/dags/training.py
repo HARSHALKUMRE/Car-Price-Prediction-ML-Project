@@ -17,7 +17,8 @@ with DAG(
 
     def training(**kwargs):
         from CarPrice.pipeline.training_pipeline import TrainingPipeline
-        TrainingPipeline().begin()
+        pipeline = TrainingPipeline()
+        pipeline.run_pipeline()
 
     
     def sync_artifact_to_s3_bucket(**kwargs):
