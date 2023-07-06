@@ -1,8 +1,15 @@
-FROM python:3.8-slim-buster
-WORKDIR /app
-COPY . /app
-
-RUN apt update -y && apt install awscli -y
-
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6 unzip -y && pip install -r requirements.txt
-CMD ["python3", "app.py"]
+FROM python:3.8
+USER root
+RUN mkdir /app
+COPY . /app/
+WORKDIR /app/
+RUN pip3 install -r requirements.txt
+ENV AIRFLOW_HOME="/app/airflow"
+ENV AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT=1000
+ENV AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True
+RUN airflow db init
+RUN airflow users create -e suryanshgrover1999@gmail.com -f Suryansh -l Grover -p auntmay -r Admin -u admin
+RUN chmod 777 start.sh
+RUN apt-get update -y && apt install awscli -y 
+ENTRYPOINT ["/bin/sh"]
+CMD ["start.sh", "python3", "app.py", "0.0.0.0", "5000"]
