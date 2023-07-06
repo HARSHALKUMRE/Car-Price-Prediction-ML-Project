@@ -15,4 +15,4 @@ RUN chmod 777 start.sh
 RUN apt-get update -y && apt install awscli -y 
 ENTRYPOINT ["/bin/sh"]
 EXPOSE 5000
-CMD ["start.sh", "python3", "app.py"]
+CMD ["start.sh", "flask", "run"]
