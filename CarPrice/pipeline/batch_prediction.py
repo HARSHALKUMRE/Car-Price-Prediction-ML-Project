@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import argparse
 from CarPrice.logger import logging
-from CarPrice.config import ModelRegistryConfig
+from CarPrice.configuration import ModelRegistryConfig
 from CarPrice.utils.file_operations import BasicUtils
 from datetime import datetime
 from dataclasses import dataclass

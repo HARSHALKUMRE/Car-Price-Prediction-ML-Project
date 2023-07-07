@@ -23,8 +23,10 @@ with DAG(
     
     def sync_artifact_to_s3_bucket(**kwargs):
         bucket_name = os.getenv("BUCKET_NAME")
-        os.system(f"aws s3 sync /app/artifact s3://{bucket_name}/artifacts")
-        os.system(f"aws s3 sync /app/saved_models s3://{bucket_name}/saved_models")
+        artifact_folder = "/app/artifact"
+        saved_model = "/app/saved_models"
+        os.system(f"aws s3 sync {artifact_folder} s3://{bucket_name}/artifacts")
+        os.system(f"aws s3 sync {saved_model} s3://{bucket_name}/saved_models")
 
     # Commence training
     training_pipeline = PythonOperator(
