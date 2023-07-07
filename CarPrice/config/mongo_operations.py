@@ -5,7 +5,7 @@ from json import loads
 import certifi
 import pymongo
 from CarPrice.constant.database import DATABASE_NAME, COLLECTION_NAME
-from CarPrice.constant.env_variable import MONGODB_URL_KEY
+from CarPrice.constant.env_variable import MONGODB_URL
 from CarPrice.exception import CarPriceException
 from CarPrice.logger import logging
 from pandas import DataFrame
@@ -28,9 +28,9 @@ class MongoDBClient:
     def __init__(self, database_name=DATABASE_NAME) -> None:
         try:
             if MongoDBClient.client is None:
-                mongo_db_url = os.getenv(MONGODB_URL_KEY)
+                mongo_db_url = os.getenv(MONGODB_URL)
                 if mongo_db_url is None:
-                    raise Exception(f"Environment key: {MONGODB_URL_KEY} is not set.")
+                    raise Exception(f"Environment key: {MONGODB_URL} is not set.")
                 MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
             self.client = MongoDBClient.client
             self.database = self.client[database_name]
